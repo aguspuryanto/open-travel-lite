@@ -1,0 +1,158 @@
+{
+  "entities": {
+    "Vehicle": {
+      "title": "Vehicle",
+      "description": "A vehicle available for rent or travel.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "capacity": { "type": "number" },
+        "transmission": { "type": "string", "enum": ["Manual", "Automatic"] },
+        "fuel": { "type": "string" },
+        "year": { "type": "number" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "facilities": { "type": "array", "items": { "type": "string" } },
+        "terms": { "type": "string" },
+        "status": { "type": "string", "enum": ["Available", "Rented", "Maintenance"] }
+      },
+      "required": ["name", "capacity", "transmission", "fuel", "year", "images", "facilities", "terms", "status"]
+    },
+    "RoutePrice": {
+      "title": "RoutePrice",
+      "description": "Pricing for a specific route and vehicle.",
+      "type": "object",
+      "properties": {
+        "vehicleId": { "type": "string" },
+        "origin": { "type": "string" },
+        "destination": { "type": "string" },
+        "price": { "type": "number" }
+      },
+      "required": ["vehicleId", "origin", "destination", "price"]
+    },
+    "Destination": {
+      "title": "Destination",
+      "description": "A travel destination or package.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string" },
+        "price": { "type": "number" }
+      },
+      "required": ["title", "description", "image"]
+    },
+    "Article": {
+      "title": "Article",
+      "description": "A blog post or news article.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "image": { "type": "string" },
+        "date": { "type": "string", "format": "date" }
+      },
+      "required": ["title", "content", "image", "date"]
+    },
+    "GalleryImage": {
+      "title": "GalleryImage",
+      "description": "An image in the gallery.",
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "caption": { "type": "string" }
+      },
+      "required": ["url", "caption"]
+    },
+    "FinanceRecord": {
+      "title": "FinanceRecord",
+      "description": "A record of income or expense.",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "date" },
+        "type": { "type": "string", "enum": ["Income", "Expense"] },
+        "amount": { "type": "number" },
+        "description": { "type": "string" },
+        "category": { "type": "string" }
+      },
+      "required": ["date", "type", "amount", "description", "category"]
+    },
+    "VehicleActivity": {
+      "title": "VehicleActivity",
+      "description": "An activity or trip for a vehicle.",
+      "type": "object",
+      "properties": {
+        "vehicleId": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "time": { "type": "string" },
+        "route": { "type": "string" },
+        "type": { "type": "string" },
+        "customerName": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["Scheduled", "On Trip", "Completed", "Cancelled", "Maintenance"] }
+      },
+      "required": ["vehicleId", "date", "time", "route", "type", "customerName", "description", "status"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global application settings.",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "tagline": { "type": "string" },
+        "description": { "type": "string" },
+        "whatsappNumbers": { "type": "array", "items": { "type": "string" } },
+        "googleMapsIframe": { "type": "string" },
+        "seoKeywords": { "type": "string" }
+      },
+      "required": ["siteName", "tagline", "description", "whatsappNumbers", "googleMapsIframe", "seoKeywords"]
+    },
+    "User": {
+      "title": "User",
+      "description": "A user of the application, typically an admin.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin"] }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/vehicles/{vehicleId}": {
+      "schema": "Vehicle",
+      "description": "Stores vehicle details."
+    },
+    "/routePrices/{routePriceId}": {
+      "schema": "RoutePrice",
+      "description": "Stores pricing for routes."
+    },
+    "/destinations/{destinationId}": {
+      "schema": "Destination",
+      "description": "Stores travel destinations and packages."
+    },
+    "/articles/{articleId}": {
+      "schema": "Article",
+      "description": "Stores blog articles."
+    },
+    "/gallery/{imageId}": {
+      "schema": "GalleryImage",
+      "description": "Stores gallery images."
+    },
+    "/finances/{financeId}": {
+      "schema": "FinanceRecord",
+      "description": "Stores financial records."
+    },
+    "/activities/{activityId}": {
+      "schema": "VehicleActivity",
+      "description": "Stores vehicle activities and trips."
+    },
+    "/settings/global": {
+      "schema": "Settings",
+      "description": "Stores global application settings."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores user profiles and roles."
+    }
+  }
+}
